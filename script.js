@@ -10,11 +10,7 @@ function getNewTime(pauseList, dateActuelle){
         
         newDateActuelle.setHours(hours);
         newDateActuelle.setMinutes(minutes);
-    
-        console.log("dateActuelle:", dateActuelle);
-        console.log("newDateActuelle:", newDateActuelle);
-    
-     
+        
         if (newDateActuelle > dateActuelle) {
             return time.split(":")
         }
@@ -30,16 +26,12 @@ function update(){
     hour = newTime[0]
     minute = newTime[1]
 
-    console.log(newTime);
-
     var heureASoustraire = new Date();
     heureASoustraire.setHours(hour - 1);
     heureASoustraire.setMinutes(minute);
     heureASoustraire.setSeconds(0);
 
     var resultat = new Date(heureASoustraire - dateActuelle);
-
-    console.log("Résultat: ", resultat.toLocaleTimeString());
 
     document.getElementById("h1").innerHTML = resultat.toLocaleTimeString()
 
