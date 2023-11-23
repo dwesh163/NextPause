@@ -2,19 +2,25 @@
     width: 120px;
     position: absolute;
     right: 0;
+    top: 0px;
 }
 
 #h1{
     font-size: 12rem
 }
 
-@media only screen and (max-width: 1003px) {
+.container{
+    margin-top: 18vh;
+    text-align: center
+}
+
+@media only screen and (max-width: 920px) {
     #h1{
         font-size: 8rem
     }
 }
 
-@media only screen and (max-width: 760px) {
+@media only screen and (max-width: 780px) {
     #h1{
         font-size: 6rem
     }
@@ -23,5 +29,14 @@
 @media only screen and (max-width: 417px) {
     #h1{
         font-size: 3rem
+    }
+}
+
+@media only screen and (max-width: 390px) {
+    #h1{
+        font-size: 2rem
+    }
+    #h2{
+        font-size: 1rem;
     }
 }
