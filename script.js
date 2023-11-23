@@ -1,7 +1,6 @@
 let choice = JSON.parse(localStorage.getItem('nextPause'));
 
 function getNewTime(pauseList, dateActuelle) {
-	newDateActuelle = dateActuelle;
 
 	for (let time of pauseList) {
 		let [hours, minutes] = time.split(':').map(parseFloat);
@@ -19,34 +18,34 @@ function getNewTime(pauseList, dateActuelle) {
 
 
 function update() {
-	var dateActuelle = new Date();
+	const dateActuelle = new Date();
+
+	let pauseList = JSON.parse(localStorage.getItem('NextPauseData'))[localStorage.getItem('NextPauseChoice')];
+
+	let newTime = getNewTime(pauseList, dateActuelle);
 	
-	pauseList = JSON.parse(localStorage.getItem('NextPauseData'))[localStorage.getItem('NextPauseChoice')];
-	
-	newTime = getNewTime(pauseList, dateActuelle);
-	
-	if (newTime == undefined) {
+	if (newTime === undefined) {
 		document.getElementById('h1').innerHTML = '...';
 		return;
 	}
-	
-	hour = newTime[0];
-	minute = newTime[1];
-	
-	var heureASoustraire = new Date();
+
+	let hour = newTime[0];
+	let minute = newTime[1];
+
+	const heureASoustraire = new Date();
 	heureASoustraire.setHours(hour);
 	heureASoustraire.setMinutes(minute);
 	heureASoustraire.setSeconds(0);
-	
-	var resultat = new Date(heureASoustraire - dateActuelle);
-	
+
+	const resultat = new Date(heureASoustraire - dateActuelle);
+
 	resultat.setHours(resultat.getHours() - 1);	
 
-	document.getElementById('h1').innerHTML = `${setStyle(resultat.getHours())}:${setStyle(resultat.getMinutes())}:${setStyle(resultat.getSeconds())}`;	
+	document.getElementById('h1').innerHTML = `${setStyle(resultat.getHours())}:${setStyle(resultat.getMinutes())}:${setStyle(resultat.getSeconds())}`;
 }
 
 function setStyle(str) {
-	return (str + "").padStart(2, "0")
+	return (str + "").padStart(2, "0");
 }
 
 async function fetchData() {
@@ -61,16 +60,16 @@ async function setOption() {
 	let choice = '';
 
 	for (let school in data) {
-		var option = document.createElement('option');
+		const option = document.createElement('option');
 		option.text = school;
 		option.value = school;
-		var select = document.getElementById('selectBox');
-		if (localStorage.getItem('NextPauseChoice') && localStorage.getItem('NextPauseChoice') == school) {
+		const select = document.getElementById('selectBox');
+		if (localStorage.getItem('NextPauseChoice') && localStorage.getItem('NextPauseChoice') === school) {
 			option.selected = true;
 		}
 		select.appendChild(option);
 
-		if (choice == '') {
+		if (choice === '') {
 			choice = school;
 		}
 	}
@@ -93,3 +92,5 @@ $(document).ready(function () {
 setInterval(() => {
 	update();
 }, 1000);
+
+
