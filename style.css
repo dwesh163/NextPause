@@ -1,0 +1,27 @@
+#selectBox {
+    width: 120px;
+    position: absolute;
+    right: 0px;
+}
+
+#h1{
+    font-size: 12rem
+}
+
+@media only screen and (max-width: 1003px) {
+    #h1{
+        font-size: 8rem
+    }
+}
+
+@media only screen and (max-width: 760px) {
+    #h1{
+        font-size: 6rem
+    }
+}
+
+@media only screen and (max-width: 417px) {
+    #h1{
+        font-size: 3rem
+    }
+}
