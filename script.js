@@ -40,12 +40,6 @@ function update() {
 	
 	resultat.setHours(resultat.getHours() - 1);
 
-	console.log(resultat);
-
-	
-	console.log(heureASoustraire);
-	console.log(dateActuelle);
-	
 	document.getElementById('h1').innerHTML = `${resultat.getHours()}:${resultat.getMinutes()}:${resultat.getSeconds()}`;
 	
 }
