@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8"/>
-        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-        <title>NextPause</title>
-        <link href="favicon.ico" rel="icon" type="image/x-icon"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <script src="script.js"></script>
-        <link href="style.css" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/@picocss/pico@next/css/pico.min.css" rel="stylesheet"/>
-    </head>
-    <body>
-        <select id="selectBox" required></select>
-        <main class="container">
-            <h2 id="h2">Prochaine sonnerie dans :</h2>
-            <h1 id="h1"></h1>
-        </main>
-    </body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>NextPause</title>
+		<link rel="icon" type="image/x-icon" href="favicon.ico" />
+   		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+		<script src="script.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@next/css/pico.min.css" />
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<div class="group" role="group">
+			<div id="box">
+				<svg id="left" width="20" height="60" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--pico-color)" class="bi bi-chevron-left" viewBox="0 0 16 16">
+					<path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+				</svg>
+				<svg id="right" width="20" height="60" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--pico-color)" class="bi bi-chevron-right" viewBox="0 0 16 16">
+					<path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+				</svg>
+			</div>
+			
+			<select id="selectBox" required></select>
+		</div>
+		<main class="container">
+			<h2 id="h2">Prochaine sonnerie dans :</h2>
+			<h1 id="h1"></h1>
+		</main>
+	</body>
+	<script src="menu.js"></script>
 </html>

@@ -1,8 +1,37 @@
-#selectBox {
-    width: 120px;
+[data-theme=light],
+:root:not([data-theme=dark]) {
+  --pico-primary-background: #ffffff;
+}
+
+@media only screen and (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --pico-primary-background: #000000;
+  }
+}
+
+body{
+    overflow: hidden;
+}
+
+.group {
+    width: 13rem;
     position: absolute;
     right: 0;
-    top: 0px;
+    top: 0;
+    transition: transform 1s !important;
+    transition-timing-function: inherit;
+
+}
+
+#box{
+    width: 11%;
+    background-color: var(--pico-form-element-background-color);
+    border: var(--pico-border-width) solid var(--pico-form-element-border-color);
+}
+
+svg{
+    cursor: pointer;
+    transition: all .3s ease-in !important;
 }
 
 #h1 {
@@ -11,10 +40,10 @@
 
 .container {
     margin-top: 18vh;
-    text-align: center
+    text-align: center;
 }
 
-@media only screen and (max-width: 920px) {
+@media only screen and (max-width: 1050px) {
     #h1 {
         font-size: 8rem
     }
@@ -41,3 +70,4 @@
         font-size: 1rem;
     }
 }
+
