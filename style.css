@@ -1,8 +1,8 @@
 #selectBox {
     width: 120px;
     position: absolute;
+    right: 0;
     top: 0px;
-    right: 0px;
 }
 
 #h1{
