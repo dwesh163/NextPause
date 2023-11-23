@@ -5,38 +5,39 @@
     top: 0px;
 }
 
-#h1{
+#h1 {
     font-size: 12rem
 }
 
-.container{
+.container {
     margin-top: 18vh;
     text-align: center
 }
 
 @media only screen and (max-width: 920px) {
-    #h1{
+    #h1 {
         font-size: 8rem
     }
 }
 
 @media only screen and (max-width: 780px) {
-    #h1{
+    #h1 {
         font-size: 6rem
     }
 }
 
 @media only screen and (max-width: 417px) {
-    #h1{
+    #h1 {
         font-size: 3rem
     }
 }
 
 @media only screen and (max-width: 390px) {
-    #h1{
+    #h1 {
         font-size: 2rem
     }
-    #h2{
+
+    #h2 {
         font-size: 1rem;
     }
 }
