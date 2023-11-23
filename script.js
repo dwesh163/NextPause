@@ -18,27 +18,36 @@ function getNewTime(pauseList, dateActuelle) {
 
 function update() {
 	var dateActuelle = new Date();
-
+	
 	pauseList = JSON.parse(localStorage.getItem('NextPauseData'))[localStorage.getItem('NextPauseChoice')];
-
+	
 	newTime = getNewTime(pauseList, dateActuelle);
-
+	
 	if (newTime == undefined) {
 		document.getElementById('h1').innerHTML = '...';
 		return;
 	}
-
+	
 	hour = newTime[0];
 	minute = newTime[1];
-
+	
 	var heureASoustraire = new Date();
-	heureASoustraire.setHours(hour - 1);
+	heureASoustraire.setHours(hour);
 	heureASoustraire.setMinutes(minute);
 	heureASoustraire.setSeconds(0);
-
+	
 	var resultat = new Date(heureASoustraire - dateActuelle);
+	
+	resultat.setHours(resultat.getHours() - 1);
 
-	document.getElementById('h1').innerHTML = resultat.toLocaleTimeString();
+	console.log(resultat);
+
+	
+	console.log(heureASoustraire);
+	console.log(dateActuelle);
+	
+	document.getElementById('h1').innerHTML = `${resultat.getHours()}:${resultat.getMinutes()}:${resultat.getSeconds()}`;
+	
 }
 
 async function fetchData() {
