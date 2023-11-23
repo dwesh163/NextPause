@@ -16,6 +16,8 @@ function getNewTime(pauseList, dateActuelle) {
 	}
 }
 
+
+
 function update() {
 	var dateActuelle = new Date();
 	
@@ -38,16 +40,13 @@ function update() {
 	
 	var resultat = new Date(heureASoustraire - dateActuelle);
 	
-	resultat.setHours(resultat.getHours() - 1);
+	resultat.setHours(resultat.getHours() - 1);	
 
-	console.log(resultat);
+	document.getElementById('h1').innerHTML = `${setStyle(resultat.getHours())}:${setStyle(resultat.getMinutes())}:${setStyle(resultat.getSeconds())}`;	
+}
 
-	
-	console.log(heureASoustraire);
-	console.log(dateActuelle);
-	
-	document.getElementById('h1').innerHTML = `${resultat.getHours()}:${resultat.getMinutes()}:${resultat.getSeconds()}`;
-	
+function setStyle(str) {
+	return (str + "").padStart(2, "0")
 }
 
 async function fetchData() {
