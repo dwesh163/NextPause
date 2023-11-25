@@ -20,7 +20,6 @@ body{
     top: 0;
     transition: transform 1s !important;
     transition-timing-function: inherit;
-
 }
 
 #box{
@@ -31,7 +30,6 @@ body{
 
 svg{
     cursor: pointer;
-    transition: all .3s ease-in !important;
 }
 
 #h1 {
@@ -43,9 +41,34 @@ svg{
     text-align: center;
 }
 
+#share{
+    width: 60px;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h6{
+    color: #f9f9f9;
+    width: 200px;
+    background-color: #151515;
+    text-align: center;
+    border-radius: 1rem;
+    padding-bottom: 6px;
+    position: absolute;
+    bottom: 1px;
+    
+}
+
 @media only screen and (max-width: 1050px) {
     #h1 {
         font-size: 8rem
+    }
+    #share{
+        width: 50px;
     }
 }
 
@@ -53,21 +76,36 @@ svg{
     #h1 {
         font-size: 6rem
     }
+    #share{
+        width: 40px;
+    }
 }
 
 @media only screen and (max-width: 417px) {
     #h1 {
-        font-size: 3rem
+        font-size: 4rem
+    }
+    #share{
+        width: 30px;
     }
 }
 
 @media only screen and (max-width: 390px) {
     #h1 {
+        font-size: 3rem
+    }
+    #h2 {
+        font-size: 1.5rem;
+    }
+}
+
+@media only screen and (max-width: 280px) {
+    #h1 {
         font-size: 2rem
     }
-
     #h2 {
         font-size: 1rem;
     }
 }
+
 
