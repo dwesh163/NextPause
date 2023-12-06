@@ -28,6 +28,10 @@ body{
     border: var(--pico-border-width) solid var(--pico-form-element-border-color);
 }
 
+#selectBox:focus {
+    border: var(--pico-border-width) solid var(--pico-form-element-border-color);
+}
+
 svg{
     cursor: pointer;
 }
