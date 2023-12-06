@@ -1,11 +1,16 @@
 [data-theme=light],
 :root:not([data-theme=dark]) {
   --pico-primary-background: #ffffff;
+  --pico-color: #000000;
+  --pico-primary: #000000;
+
 }
 
 @media only screen and (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
     --pico-primary-background: #000000;
+    --pico-color: #ffffff;
+    --pico-primary: #ffffff;
   }
 }
 
@@ -67,7 +72,36 @@ h6{
     
 }
 
-@media only screen and (max-width: 1050px) {
+.scroll {
+    overflow-y: scroll;
+}
+
+.list {
+    display:flex;
+    justify-content:center;
+}
+
+ul {
+    text-align: start;
+}
+
+.p-0 {
+    padding:0;
+}
+
+.mb-5 {
+    margin-bottom: 5rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    margin:25px 25px 0;
+}
+
+@media only screen and (max-width: 920px) {
     #h1 {
         font-size: 8rem
     }
