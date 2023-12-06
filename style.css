@@ -14,6 +14,46 @@
     text-align: center
 }
 
+.btn {
+    padding: 5px 10px;
+    border-radius: 5px;
+
+    color: black;
+}
+
+ul {
+    width: fit-content;
+    text-align: start;
+}
+ul li {
+    padding-left:25px;
+}
+
+article {
+    display:flex;
+    justify-content: center;
+    flex-direction:column;
+    align-items: center;
+}
+
+.btn-return {
+    color: black;
+    margin-left:50px;
+    text-decoration: none;
+}
+
+.btn-return:hover{
+    text-decoration: underline;
+}
+
+.politicy {
+    padding:0 5rem ;
+}
+
+.mb-5 {
+    margin-bottom: 5rem;
+}
+
 @media only screen and (max-width: 920px) {
     #h1 {
         font-size: 8rem
