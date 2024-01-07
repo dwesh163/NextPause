@@ -1,20 +1,20 @@
 [data-theme=light],
 :root:not([data-theme=dark]) {
-  --pico-primary-background: #ffffff;
-  --pico-color: #000000;
-  --pico-primary: #000000;
+    --pico-primary-background: #ffffff;
+    --pico-color: #000000;
+    --pico-primary: #000000;
 
 }
 
 @media only screen and (prefers-color-scheme: dark) {
-  :root:not([data-theme]) {
-    --pico-primary-background: #000000;
-    --pico-color: #ffffff;
-    --pico-primary: #ffffff;
-  }
+    :root:not([data-theme]) {
+        --pico-primary-background: #000000;
+        --pico-color: #ffffff;
+        --pico-primary: #ffffff;
+    }
 }
 
-body{
+body {
     overflow: hidden;
 }
 
@@ -27,7 +27,7 @@ body{
     transition-timing-function: inherit;
 }
 
-#box{
+#box {
     width: 11%;
     background-color: var(--pico-form-element-background-color);
     border: var(--pico-border-width) solid var(--pico-form-element-border-color);
@@ -37,7 +37,7 @@ body{
     border: var(--pico-border-width) solid var(--pico-form-element-border-color);
 }
 
-svg{
+svg {
     cursor: pointer;
 }
 
@@ -50,7 +50,7 @@ svg{
     text-align: center;
 }
 
-#share{
+#share {
     width: 60px;
 }
 
@@ -60,7 +60,7 @@ footer {
     align-items: center;
 }
 
-h6{
+h6 {
     color: #f9f9f9;
     width: 200px;
     background-color: #151515;
@@ -69,7 +69,7 @@ h6{
     padding-bottom: 6px;
     position: absolute;
     bottom: 1px;
-    
+
 }
 
 .scroll {
@@ -77,8 +77,8 @@ h6{
 }
 
 .list {
-    display:flex;
-    justify-content:center;
+    display: flex;
+    justify-content: center;
 }
 
 ul {
@@ -86,7 +86,7 @@ ul {
 }
 
 .p-0 {
-    padding:0;
+    padding: 0;
 }
 
 .mb-5 {
@@ -98,13 +98,13 @@ a {
 }
 
 button {
-    margin:25px 25px 0;
+    margin: 25px 25px 0;
 }
 
 #politicy-link {
     position: absolute;
-    bottom:0;
-    left:5px;
+    bottom: 0;
+    left: 5px;
     font-size: 15px;
     opacity: 0.25;
 }
@@ -114,7 +114,8 @@ button {
     #h1 {
         font-size: 8rem
     }
-    #share{
+
+    #share {
         width: 50px;
     }
 }
@@ -123,7 +124,8 @@ button {
     #h1 {
         font-size: 6rem
     }
-    #share{
+
+    #share {
         width: 40px;
     }
 }
@@ -132,7 +134,8 @@ button {
     #h1 {
         font-size: 4rem
     }
-    #share{
+
+    #share {
         width: 30px;
     }
 }
@@ -141,7 +144,8 @@ button {
     #h1 {
         font-size: 3rem
     }
-    #h2 {
+
+    #text {
         font-size: 1.5rem;
     }
 }
@@ -150,9 +154,8 @@ button {
     #h1 {
         font-size: 2rem
     }
-    #h2 {
+
+    #text {
         font-size: 1rem;
     }
 }
-
-
