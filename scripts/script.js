@@ -47,7 +47,9 @@ function update() {
 	resultat.setHours(resultat.getHours() - 1);
 
 	document.getElementById('h1').innerHTML = `${setStyle(resultat.getHours())}:${setStyle(resultat.getMinutes())}:${setStyle(resultat.getSeconds())}`;
-	document.getElementById('text').innerHTML = getTextForHour(pauseList, `${newTime[0]}:${newTime[1]}`);
+	if (pauseList[0].length == 2) {
+		document.getElementById('text').innerHTML = getTextForHour(pauseList, `${newTime[0]}:${newTime[1]}`);
+	}
 }
 
 function setStyle(str) {
