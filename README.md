@@ -1,20 +1,54 @@
-# NextPause HTML Project
+# React + TypeScript + Vite
 
-This project features a simple HTML page named "NextPause" which utilizes JavaScript and CSS to manage and display a countdown timer for upcoming events.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Usage
+Currently, two official plugins are available:
 
-1. Open the [link](https://dwesh163.github.io/NextPause) file in a web browser to view the countdown timer.
-2. Utilize the left and right arrows to navigate through the available options.
-3. The countdown timer provides the time remaining until the next scheduled event.
-4. The "Share" button enables users to copy a link, with functionality implemented in `share.js`.
-5. Additional styles are applied using the Pico CSS framework.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Dependencies
+## Expanding the ESLint configuration
 
-- [jQuery](https://jquery.com/): Utilized for simplifying JavaScript code.
-- [Pico CSS](https://picocss.com/): A minimal CSS framework for styling.
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-## Credits
+```js
+export default tseslint.config({
+  extends: [
+    // Remove ...tseslint.configs.recommended and replace with this
+    ...tseslint.configs.recommendedTypeChecked,
+    // Alternatively, use this for stricter rules
+    ...tseslint.configs.strictTypeChecked,
+    // Optionally, add this for stylistic rules
+    ...tseslint.configs.stylisticTypeChecked,
+  ],
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
+```
 
-- Project created by [dwesh163](https://github.com/dwesh163) and [ClaireProd](https://github.com/ClaireProd)
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default tseslint.config({
+  plugins: {
+    // Add the react-x and react-dom plugins
+    'react-x': reactX,
+    'react-dom': reactDom,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended typescript rules
+    ...reactX.configs['recommended-typescript'].rules,
+    ...reactDom.configs.recommended.rules,
+  },
+})
+```

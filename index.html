@@ -1,58 +1,15 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>NextPause</title>
-	<link rel="icon" type="image/x-icon" href="favicon.ico" />
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-	<script src="scripts/script.js"></script>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@next/css/pico.min.css" />
-	<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NextPause</title>
 </head>
-<script defer data-domain="dwesh163.github.io" src="https://plausible.kooked.app/js/script.js"></script>
-<script>window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
-<script defer src="https://umami.kooked.app/script.js" data-website-id="b4ebff4c-af77-4655-bb24-0d31e2922c4e"></script>
-<script src="scripts/loading.js"></script>
 
 <body>
-	<div class="group" role="group">
-		<div id="box">
-			<svg id="left" width="20" height="60" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-				fill="var(--pico-color)" class="bi bi-chevron-left" viewBox="0 0 16 16">
-				<path fill-rule="evenodd"
-					d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
-			</svg>
-			<svg id="right" width="20" height="60" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-				fill="var(--pico-color)" class="bi bi-chevron-right" viewBox="0 0 16 16">
-				<path fill-rule="evenodd"
-					d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
-			</svg>
-		</div>
-
-		<select id="selectBox" required></select>
-	</div>
-
-	<svg xmlns="http://www.w3.org/2000/svg" id="share" data-name="Layer 1" viewBox="0 0 24 24" fill="var(--pico-color)"
-		style="position: absolute; right: 3px; bottom:5px;">
-		<path
-			d="m21.707 11.293-8-8A1 1 0 0 0 12 4v3.545A11.015 11.015 0 0 0 2 18.5V20a1 1 0 0 0 1.784.62 11.456 11.456 0 0 1 7.887-4.049c.05-.006.175-.016.329-.026V20a1 1 0 0 0 1.707.707l8-8a1 1 0 0 0 0-1.414ZM14 17.586V15.5a1 1 0 0 0-1-1c-.255 0-1.296.05-1.562.085a14.005 14.005 0 0 0-7.386 2.948A9.013 9.013 0 0 1 13 9.5a1 1 0 0 0 1-1V6.414L19.586 12Z">
-		</path>
-	</svg>
-
-	<main class="container">
-		<h2 id="text">Prochaine sonnerie dans :</h2>
-		<h1 id="h1"></h1>
-	</main>
-	<footer>
-		<h6 style="display: none;">Lien copié !</h6>
-	</footer>
-	<span id="moreStyle"><a href="">More style</a></span>
-
-	<a href="/NextPause/politicy.html" id="politicy-link">Politique de confidentialité</a>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
 </body>
-<script src="scripts/menu.js"></script>
-<script src="scripts/share.js"></script>
 
 </html>
