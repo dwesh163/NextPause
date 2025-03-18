@@ -20,7 +20,7 @@ export default function Main() {
 	const [text, setText] = useState<string>('');
 	const [currentTime, setCurrentTime] = useState<Date>(new Date());
 	const [noMoreEvents, setNoMoreEvents] = useState(false);
-	const [mobileScale, setMobileScale] = useState(scale); // State pour gérer le scale dynamique
+	const [mobileScale, setMobileScale] = useState(scale);
 
 	useEffect(() => {
 		const intervalId = setInterval(() => {
@@ -30,7 +30,6 @@ export default function Main() {
 	}, []);
 
 	useEffect(() => {
-		// Logique de gestion des événements
 		if (school && school.time) {
 			const currentMinutes = currentTime.getHours() * 60 + currentTime.getMinutes();
 			const nextTime = school.time.find((t) => {
@@ -64,23 +63,18 @@ export default function Main() {
 		}
 	}, [selectedSchool]);
 
-	// Gestion du redimensionnement de l'écran et ajustement du scale
 	useEffect(() => {
 		const handleResize = () => {
 			if (window.innerWidth <= 640) {
-				// Si la taille de l'écran est mobile, on divise le scale par 3
 				setMobileScale(scale / 3);
 			} else {
-				// Sinon, on garde le scale normal
 				setMobileScale(scale);
 			}
 		};
 
-		// Initialiser et écouter les changements de taille de l'écran
-		handleResize(); // pour initialiser
+		handleResize();
 		window.addEventListener('resize', handleResize);
 
-		// Nettoyage de l'écouteur d'événements
 		return () => window.removeEventListener('resize', handleResize);
 	}, [scale]);
 
@@ -142,7 +136,6 @@ export default function Main() {
 
 	return (
 		<div className="h-full w-full flex flex-col items-center justify-center">
-			{/* Applique le scale dynamique ici en fonction de l'état mobileScale */}
 			<div className="flex flex-col items-center justify-center" style={{ transform: `scale(${mobileScale})` }}>
 				<h2 className="text-2xl font-semibold mb-6 text-center" style={{ color: theme.text, fontFamily: 'Arial' }}>
 					{text ? text : 'Prochaine sonnerie dans :'}
