@@ -1,13 +1,23 @@
 import { useEffect, useState } from 'react';
 import time from '../assets/time.json';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { TimeObject, Theme } from '../types/types';
 import ThemeSelector from '../components/ThemeSelector';
 import { getStoredTheme } from '../utils/themes';
 
 export default function Layout() {
 	const navigate = useNavigate();
-	const [selectedSchool, setSelectedSchool] = useState<string | null>(localStorage.getItem('selectedSchool'));
+	const location = useLocation();
+
+	const getInitialSchool = () => {
+		const urlPath = location.pathname.split('/')[1];
+		if (urlPath && urlPath in time) return urlPath;
+		const storedSchool = localStorage.getItem('selectedSchool');
+		if (storedSchool && time[storedSchool as keyof typeof time]) return storedSchool;
+		return 'epsic';
+	};
+
+	const [selectedSchool, setSelectedSchool] = useState<string | null>(getInitialSchool());
 	const [theme, setTheme] = useState<Theme>(getStoredTheme());
 	const [showSidebar, setShowSidebar] = useState(false);
 	const [scale, setScale] = useState(() => {
@@ -27,17 +37,11 @@ export default function Layout() {
 	};
 
 	useEffect(() => {
-		if (selectedSchool !== null) {
+		if (selectedSchool) {
 			localStorage.setItem('selectedSchool', selectedSchool);
 			navigate(`/${selectedSchool}`);
 		}
 	}, [selectedSchool, navigate]);
-
-	useEffect(() => {
-		if (localStorage.getItem('selectedSchool') !== null) {
-			setSelectedSchool(localStorage.getItem('selectedSchool'));
-		}
-	}, []);
 
 	return (
 		<main
@@ -77,18 +81,7 @@ export default function Layout() {
 
 					<div className="mb-6">
 						<label className="block text-white text-sm mb-2">Timer Size: {scale.toFixed(1)}x</label>
-						<input
-							type="range"
-							min="1"
-							max="4"
-							step="0.1"
-							value={scale}
-							onChange={handleScaleChange}
-							className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
-							style={{
-								accentColor: theme.accent,
-							}}
-						/>
+						<input type="range" min="1" max="4" step="0.1" value={scale} onChange={handleScaleChange} className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer" style={{ accentColor: theme.accent }} />
 					</div>
 
 					<div className="flex-grow">
