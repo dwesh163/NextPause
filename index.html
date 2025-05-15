@@ -15,6 +15,19 @@
       person_profiles: 'always', // or 'always' to create profiles for anonymous users as well
     })
   </script>
+  <script>
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function () {
+      var u = "https://github-dwesh163.matomo.cloud/";
+      _paq.push(['setTrackerUrl', u + 'matomo.php']);
+      _paq.push(['setSiteId', '1']);
+      var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+      g.async = true; g.src = 'https://cdn.matomo.cloud/github-dwesh163.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g, s);
+    })();
+  </script>
   <script src="https://app.rybbit.io/api/script.js" data-site-id="426" defer></script>
 </head>
 
