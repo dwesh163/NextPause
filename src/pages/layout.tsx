@@ -20,6 +20,7 @@ export default function Layout() {
 	const [selectedSchool, setSelectedSchool] = useState<string | null>(getInitialSchool());
 	const [theme, setTheme] = useState<Theme>(getStoredTheme());
 	const [showSidebar, setShowSidebar] = useState(false);
+	const [showSchedule, setShowSchedule] = useState(false);
 	const [scale, setScale] = useState(() => {
 		const savedScale = localStorage.getItem('timerScale');
 		return savedScale ? parseFloat(savedScale) : 2.5;
@@ -54,9 +55,45 @@ export default function Layout() {
 				position: 'relative',
 				transition: 'all 0.3s ease',
 			}}>
+			<button className="fixed top-4 right-14 z-50 text-lg opacity-70 hover:opacity-100 transition-opacity" onClick={() => setShowSchedule(true)} style={{ color: theme.accent }}>
+				📅
+			</button>
 			<button className="fixed top-4 right-4 z-50 text-lg opacity-70 hover:opacity-100 transition-opacity" onClick={() => setShowSidebar(!showSidebar)} style={{ color: theme.accent }}>
 				{showSidebar ? '✕' : '⚙️'}
 			</button>
+
+			{showSchedule && selectedSchool && (
+				<div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60" onClick={() => setShowSchedule(false)}>
+					<div
+						className="relative rounded-xl p-6 w-80 max-h-[80vh] overflow-y-auto shadow-2xl"
+						style={{ background: theme.card, color: theme.text }}
+						onClick={(e) => e.stopPropagation()}>
+						<button
+							className="absolute top-3 right-4 text-lg opacity-60 hover:opacity-100 transition-opacity"
+							onClick={() => setShowSchedule(false)}
+							style={{ color: theme.text }}>
+							✕
+						</button>
+						<h2 className="text-lg font-semibold mb-4" style={{ color: theme.accent }}>
+							{(time as TimeObject)[selectedSchool].name}
+						</h2>
+						<ul className="space-y-1 text-sm">
+							{(time as TimeObject)[selectedSchool].time.map((t, i) => (
+								<li key={i} className="flex items-center gap-3 py-1 border-b border-white border-opacity-10 last:border-0">
+									<span className="font-mono w-12 text-right" style={{ color: theme.accent }}>{t}</span>
+									<span className="opacity-80">
+										{(time as TimeObject)[selectedSchool].text
+											? (time as TimeObject)[selectedSchool].text![i] ?? ''
+											: i % 2 === 0
+												? 'Début de période'
+												: 'Fin de période'}
+									</span>
+								</li>
+							))}
+						</ul>
+					</div>
+				</div>
+			)}
 
 			<div className="h-full w-full">
 				<div className="h-full w-full" style={{ backgroundColor: theme.card, borderRadius: '12px' }}>
