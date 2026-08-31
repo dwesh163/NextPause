@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { getSchools } from './api';
 import Layout from './pages/layout';
@@ -16,11 +16,15 @@ export default function App() {
 function AppRoutes() {
 	const navigate = useNavigate();
 	const location = useLocation();
-
-	const schools = getSchools().map(({ id }) => `/${id}`);
-	const firstSchool = schools[0];
+	const [schools, setSchools] = useState<string[] | null>(null);
 
 	useEffect(() => {
+		getSchools().then((list) => setSchools(list.map(({ id }) => `/${id}`)));
+	}, []);
+
+	useEffect(() => {
+		if (!schools) return;
+		const firstSchool = schools[0];
 		const storedSchool = localStorage.getItem('selectedSchool');
 
 		if (location.pathname === '/' && firstSchool) {
@@ -32,7 +36,9 @@ function AppRoutes() {
 		if (schools.includes(location.pathname) && storedSchool !== location.pathname.replace('/', '')) {
 			localStorage.setItem('selectedSchool', location.pathname.replace('/', ''));
 		}
-	}, [location.pathname, navigate, firstSchool, schools]);
+	}, [location.pathname, navigate, schools]);
+
+	if (!schools) return null;
 
 	return (
 		<Routes>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getSchools, getTime } from '../api';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
-import { Theme } from '../types/types';
+import { School, Theme } from '../types/types';
 import ThemeSelector from '../components/ThemeSelector';
 import { getStoredTheme } from '../utils/themes';
 
@@ -9,15 +9,9 @@ export default function Layout() {
 	const navigate = useNavigate();
 	const location = useLocation();
 
-	const getInitialSchool = () => {
-		const urlPath = location.pathname.split('/')[1];
-		if (urlPath && getTime(urlPath)) return urlPath;
-		const storedSchool = localStorage.getItem('selectedSchool');
-		if (storedSchool && getTime(storedSchool)) return storedSchool;
-		return 'epsic';
-	};
-
-	const [selectedSchool, setSelectedSchool] = useState<string | null>(getInitialSchool());
+	const [schoolsList, setSchoolsList] = useState<{ id: string; name: string }[]>([]);
+	const [selectedSchool, setSelectedSchool] = useState<string | null>(null);
+	const [scheduleData, setScheduleData] = useState<School | null>(null);
 	const [theme, setTheme] = useState<Theme>(getStoredTheme());
 	const [showSidebar, setShowSidebar] = useState(false);
 	const [showSchedule, setShowSchedule] = useState(false);
@@ -38,9 +32,28 @@ export default function Layout() {
 	};
 
 	useEffect(() => {
+		getSchools().then((list) => {
+			setSchoolsList(list);
+
+			const urlPath = location.pathname.split('/')[1];
+			if (urlPath && list.some(({ id }) => id === urlPath)) {
+				setSelectedSchool(urlPath);
+				return;
+			}
+			const storedSchool = localStorage.getItem('selectedSchool');
+			if (storedSchool && list.some(({ id }) => id === storedSchool)) {
+				setSelectedSchool(storedSchool);
+				return;
+			}
+			setSelectedSchool('epsic');
+		});
+	}, [location.pathname]);
+
+	useEffect(() => {
 		if (selectedSchool) {
 			localStorage.setItem('selectedSchool', selectedSchool);
 			navigate(`/${selectedSchool}`);
+			getTime(selectedSchool).then((data) => setScheduleData(data ?? null));
 		}
 	}, [selectedSchool, navigate]);
 
@@ -62,7 +75,7 @@ export default function Layout() {
 				{showSidebar ? '✕' : '⚙️'}
 			</button>
 
-			{showSchedule && selectedSchool && (
+			{showSchedule && scheduleData && (
 				<div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60" onClick={() => setShowSchedule(false)}>
 					<div
 						className="relative rounded-xl p-6 w-80 max-h-[80vh] overflow-y-auto shadow-2xl"
@@ -75,15 +88,15 @@ export default function Layout() {
 							✕
 						</button>
 						<h2 className="text-lg font-semibold mb-4" style={{ color: theme.accent }}>
-							{getTime(selectedSchool)?.name}
+							{scheduleData.name}
 						</h2>
 						<ul className="space-y-1 text-sm">
-							{getTime(selectedSchool)?.time.map((t, i) => (
+							{scheduleData.time.map((t, i) => (
 								<li key={i} className="flex items-center gap-3 py-1 border-b border-white border-opacity-10 last:border-0">
 									<span className="font-mono w-12 text-right" style={{ color: theme.accent }}>{t}</span>
 									<span className="opacity-80">
-										{getTime(selectedSchool)?.text
-											? getTime(selectedSchool)?.text![i] ?? ''
+										{scheduleData.text
+											? scheduleData.text[i] ?? ''
 											: i % 2 === 0
 												? 'Début de période'
 												: 'Fin de période'}
@@ -108,7 +121,7 @@ export default function Layout() {
 					<div className="mb-6">
 						<label className="block text-white text-sm mb-2">School</label>
 						<select value={selectedSchool ?? ''} onChange={(e) => setSelectedSchool(e.target.value)} className="w-full bg-gray-800 border border-gray-700 text-white rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-opacity-50" style={{ borderColor: theme.accent }}>
-							{getSchools().map(({ id, name }) => (
+							{schoolsList.map(({ id, name }) => (
 								<option key={id} value={id}>
 									{name}
 								</option>
