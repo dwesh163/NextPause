@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
-import timeData from './assets/time.json';
+import { getSchools } from './api';
 import Layout from './pages/layout';
 import Main from './pages/main';
 import NoPage from './pages/noPage';
@@ -17,7 +17,7 @@ function AppRoutes() {
 	const navigate = useNavigate();
 	const location = useLocation();
 
-	const schools = Object.keys(timeData).map((school) => `/${school}`);
+	const schools = getSchools().map(({ id }) => `/${id}`);
 	const firstSchool = schools[0];
 
 	useEffect(() => {

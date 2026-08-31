@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
-import timeData from '../assets/time.json';
+import { getTime } from '../api';
 import { School, Theme } from '../types/types';
 import FlipClock from '../components/timers/FlipClock';
 import MinimalTimer from '../components/timers/MinimalTimer';
@@ -14,8 +14,8 @@ import BasicTimer from '../components/timers/BasicTimer';
 
 export default function Main() {
 	const { theme, scale } = useOutletContext<{ theme: Theme; scale: number }>();
-	const selectedSchool = localStorage.getItem('selectedSchool') as keyof typeof timeData | null;
-	const [school, setSchool] = useState<School>(selectedSchool ? timeData[selectedSchool] : ({} as School));
+	const selectedSchool = localStorage.getItem('selectedSchool');
+	const [school, setSchool] = useState<School>((selectedSchool && getTime(selectedSchool)) || ({} as School));
 	const [timeUntilNextEvent, setTimeUntilNextEvent] = useState<Date>(new Date());
 	const [text, setText] = useState<string>('');
 	const [currentTime, setCurrentTime] = useState<Date>(new Date());
@@ -59,7 +59,8 @@ export default function Main() {
 
 	useEffect(() => {
 		if (selectedSchool) {
-			setSchool(timeData[selectedSchool]);
+			const school = getTime(selectedSchool);
+			if (school) setSchool(school);
 		}
 	}, [selectedSchool]);
 

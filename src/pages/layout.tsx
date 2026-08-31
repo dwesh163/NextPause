@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import time from '../assets/time.json';
+import { getSchools, getTime } from '../api';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
-import { TimeObject, Theme } from '../types/types';
+import { Theme } from '../types/types';
 import ThemeSelector from '../components/ThemeSelector';
 import { getStoredTheme } from '../utils/themes';
 
@@ -11,9 +11,9 @@ export default function Layout() {
 
 	const getInitialSchool = () => {
 		const urlPath = location.pathname.split('/')[1];
-		if (urlPath && urlPath in time) return urlPath;
+		if (urlPath && getTime(urlPath)) return urlPath;
 		const storedSchool = localStorage.getItem('selectedSchool');
-		if (storedSchool && time[storedSchool as keyof typeof time]) return storedSchool;
+		if (storedSchool && getTime(storedSchool)) return storedSchool;
 		return 'epsic';
 	};
 
@@ -75,15 +75,15 @@ export default function Layout() {
 							✕
 						</button>
 						<h2 className="text-lg font-semibold mb-4" style={{ color: theme.accent }}>
-							{(time as TimeObject)[selectedSchool].name}
+							{getTime(selectedSchool)?.name}
 						</h2>
 						<ul className="space-y-1 text-sm">
-							{(time as TimeObject)[selectedSchool].time.map((t, i) => (
+							{getTime(selectedSchool)?.time.map((t, i) => (
 								<li key={i} className="flex items-center gap-3 py-1 border-b border-white border-opacity-10 last:border-0">
 									<span className="font-mono w-12 text-right" style={{ color: theme.accent }}>{t}</span>
 									<span className="opacity-80">
-										{(time as TimeObject)[selectedSchool].text
-											? (time as TimeObject)[selectedSchool].text![i] ?? ''
+										{getTime(selectedSchool)?.text
+											? getTime(selectedSchool)?.text![i] ?? ''
 											: i % 2 === 0
 												? 'Début de période'
 												: 'Fin de période'}
@@ -108,9 +108,9 @@ export default function Layout() {
 					<div className="mb-6">
 						<label className="block text-white text-sm mb-2">School</label>
 						<select value={selectedSchool ?? ''} onChange={(e) => setSelectedSchool(e.target.value)} className="w-full bg-gray-800 border border-gray-700 text-white rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-opacity-50" style={{ borderColor: theme.accent }}>
-							{Object.keys(time).map((school) => (
-								<option key={school} value={school}>
-									{(time as TimeObject)[school].name}
+							{getSchools().map(({ id, name }) => (
+								<option key={id} value={id}>
+									{name}
 								</option>
 							))}
 						</select>
